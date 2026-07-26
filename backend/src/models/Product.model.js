@@ -4,13 +4,13 @@ const productSchema = new mongoose.Schema(
   {
     nameAr: {
       type: String,
-      required: [true, 'Arabic name is required'],
       trim: true,
+      default: '',
     },
     nameFr: {
       type: String,
-      required: [true, 'French name is required'],
       trim: true,
+      default: '',
     },
     descriptionAr: {
       type: String,
