@@ -3,19 +3,32 @@ const Product = require('../../models/Product.model');
 const AppError = require('../../utils/apiError');
 const { sendSuccess, sendCreated } = require('../../utils/apiResponse');
 
-// Helper to generate unique order number
+// Helper to generate unique order number (DDMMYYHHmm format)
 const generateOrderNumber = async () => {
-  const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-  const randomStr = Math.floor(1000 + Math.random() * 9000);
-  let orderNumber = `ORD-${dateStr}-${randomStr}`;
+  const now = new Date();
+  const dd = String(now.getDate()).padStart(2, '0');
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const yy = String(now.getFullYear()).slice(-2);
+  const hh = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const base = `${dd}${mm}${yy}${hh}${min}`;
   
-  // Ensure uniqueness
+  // Check how many orders exist in the same minute
+  const regex = new RegExp(`^${base}`);
+  const count = await Order.countDocuments({ orderNumber: { $regex: regex } });
+  
+  // If no collision, use base; otherwise append a suffix
+  let orderNumber = count === 0 ? base : `${base}${String(count).padStart(2, '0')}`;
+  
+  // Ensure uniqueness (fallback)
   let exists = await Order.findOne({ orderNumber });
+  let suffix = count;
   while (exists) {
-    const newRandom = Math.floor(1000 + Math.random() * 9000);
-    orderNumber = `ORD-${dateStr}-${newRandom}`;
+    suffix++;
+    orderNumber = `${base}${String(suffix).padStart(2, '0')}`;
     exists = await Order.findOne({ orderNumber });
   }
+  
   return orderNumber;
 };
 
@@ -48,10 +61,6 @@ const createOrder = async (req, res, next) => {
         return next(new AppError(`Product is no longer available: ${product.nameAr}`, 400));
       }
 
-      if (product.quantity < item.quantity) {
-        return next(new AppError(`Insufficient stock for ${product.nameAr}. Only ${product.quantity} left.`, 400));
-      }
-
       // Use DB price, not client provided price
       const activePrice = product.discountPrice ? product.discountPrice : product.price;
       const subtotal = activePrice * item.quantity;
@@ -69,11 +78,6 @@ const createOrder = async (req, res, next) => {
       totalPrice += subtotal;
       totalItems += item.quantity;
       
-      // Decrement stock
-      product.quantity -= item.quantity;
-      if (product.quantity <= 0) {
-        product.isActive = false;
-      }
       await product.save();
     }
 
@@ -171,12 +175,7 @@ const updateOrderStatus = async (req, res, next) => {
 
     // Optional: Implement stock restoration if cancelled
     if (status === 'cancelled' && order.status !== 'cancelled') {
-      for (const item of order.items) {
-        await Product.findByIdAndUpdate(item.product, {
-          $inc: { quantity: item.quantity },
-          $set: { isActive: true } // Reactivate if it was out of stock
-        });
-      }
+      // Stock restoration not needed - catalog only
     }
 
     order.status = status;

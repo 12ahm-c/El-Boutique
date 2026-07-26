@@ -207,7 +207,7 @@
     "failed_delete": "فشل في حذف Ürün",
     "name_required": "الاسم مطلوب",
     "discount_error": "يجب أن يكون سعر التخفيض أقل من السعر الأصلي",
-    "category_brand_required": "التصنيف والعلامة التجارية مطلوبان",
+    "category_required": "التصنيف مطلوب",
     "edit_category": "تعديل التصنيف",
     "add_category_modal": "إضافة تصنيف",
     "delete_category": "حذف التصنيف",

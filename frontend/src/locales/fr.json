@@ -207,7 +207,7 @@
     "failed_delete": "Échec de la suppression du produit",
     "name_required": "Le nom est requis",
     "discount_error": "Le prix réduit doit être inférieur au prix régulier",
-    "category_brand_required": "La catégorie et la marque sont requises",
+    "category_required": "La catégorie est requise",
     "edit_category": "Modifier la catégorie",
     "add_category_modal": "Ajouter une catégorie",
     "delete_category": "Supprimer la catégorie",

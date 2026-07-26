@@ -104,8 +104,8 @@ const ProductFormPage = () => {
       return;
     }
 
-    if (!formData.category || !formData.brand) {
-      setError(t('admin.category_brand_required'));
+    if (!formData.category) {
+      setError(t('admin.category_required'));
       return;
     }
 
@@ -226,7 +226,6 @@ const ProductFormPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.brand')}</label>
               <select
                 name="brand"
-                required
                 value={formData.brand}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black bg-white"
@@ -273,7 +272,6 @@ const ProductFormPage = () => {
               <input
                 type="number"
                 name="quantity"
-                required
                 min="0"
                 value={formData.quantity}
                 onChange={handleChange}
