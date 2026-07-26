@@ -3,32 +3,22 @@ const Product = require('../../models/Product.model');
 const AppError = require('../../utils/apiError');
 const { sendSuccess, sendCreated } = require('../../utils/apiResponse');
 
-// Helper to generate unique order number (DDMMYYHHmm format)
+// Helper to generate unique order number (YYYYMMDD-XXX format: date + sequential)
 const generateOrderNumber = async () => {
   const now = new Date();
-  const dd = String(now.getDate()).padStart(2, '0');
+  const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
-  const yy = String(now.getFullYear()).slice(-2);
-  const hh = String(now.getHours()).padStart(2, '0');
-  const min = String(now.getMinutes()).padStart(2, '0');
-  const base = `${dd}${mm}${yy}${hh}${min}`;
-  
-  // Check how many orders exist in the same minute
-  const regex = new RegExp(`^${base}`);
+  const dd = String(now.getDate()).padStart(2, '0');
+  const datePrefix = `${yyyy}${mm}${dd}`;
+
+  // Count existing orders for this date
+  const regex = new RegExp(`^${datePrefix}`);
   const count = await Order.countDocuments({ orderNumber: { $regex: regex } });
-  
-  // If no collision, use base; otherwise append a suffix
-  let orderNumber = count === 0 ? base : `${base}${String(count).padStart(2, '0')}`;
-  
-  // Ensure uniqueness (fallback)
-  let exists = await Order.findOne({ orderNumber });
-  let suffix = count;
-  while (exists) {
-    suffix++;
-    orderNumber = `${base}${String(suffix).padStart(2, '0')}`;
-    exists = await Order.findOne({ orderNumber });
-  }
-  
+
+  // Sequential number: 001, 002, 003...
+  const seq = String(count + 1).padStart(3, '0');
+  const orderNumber = `${datePrefix}-${seq}`;
+
   return orderNumber;
 };
 
