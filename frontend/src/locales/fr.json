@@ -38,8 +38,8 @@
   "login": {
     "title": "Connexion",
     "subtitle": "Connectez-vous pour gérer",
-    "email": "Adresse e-mail",
-    "email_placeholder": "admin@elboutique.com",
+    "phone": "Numéro de téléphone",
+    "phone_placeholder": "46335337",
     "password": "Mot de passe",
     "password_placeholder": "••••••••",
     "signing_in": "Connexion en cours...",

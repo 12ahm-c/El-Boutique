@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import { useSettings } from '../../context/SettingsContext';
 import api from '../../config/axios';
-import { Lock, Mail, AlertCircle, Loader2, Package } from 'lucide-react';
+import { Lock, Phone, AlertCircle, Loader2, Package } from 'lucide-react';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ const LoginPage = () => {
   const { login } = useAuth();
   const { settings } = useSettings();
   
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ phone: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,19 +68,19 @@ const LoginPage = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                {t('login.email')}
+                {t('login.phone')}
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                  <Phone className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  name="email"
-                  type="email"
+                  name="phone"
+                  type="tel"
                   required
                   className="focus:ring-black focus:border-black block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-2 border"
-                  placeholder={t('login.email_placeholder')}
-                  value={formData.email}
+                  placeholder={t('login.phone_placeholder')}
+                  value={formData.phone}
                   onChange={handleChange}
                   dir="ltr"
                 />

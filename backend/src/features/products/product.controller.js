@@ -39,10 +39,9 @@ const getProducts = async (req, res, next) => {
 
     const filter = {};
 
-    // If not authenticated, hide inactive and out of stock
+    // If not authenticated, hide inactive
     if (!req.admin) {
       filter.isActive = true;
-      filter.quantity = { $gt: 0 };
     }
 
     if (category) filter.category = category;

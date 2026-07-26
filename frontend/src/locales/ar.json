@@ -38,8 +38,8 @@
   "login": {
     "title": "تسجيل الدخول",
     "subtitle": "سجّل الدخول لإدارة",
-    "email": "البريد الإلكتروني",
-    "email_placeholder": "admin@elboutique.com",
+    "phone": "رقم الهاتف",
+    "phone_placeholder": "46335337",
     "password": "كلمة المرور",
     "password_placeholder": "••••••••",
     "signing_in": "جاري تسجيل الدخول...",
