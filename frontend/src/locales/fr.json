@@ -276,7 +276,11 @@
     "credentials_failed": "Échec de la mise à jour des identifiants",
     "passwords_not_match": "Les mots de passe ne correspondent pas",
     "password_min_length": "Le mot de passe doit contenir au moins 6 caractères",
-    "phone_number": "Numéro de téléphone"
+    "phone_number": "Numéro de téléphone",
+    "store_link": "Lien de la boutique",
+    "store_link_help": "Ce lien sera affiché aux clients pour parcourir les produits et passer des commandes.",
+    "copy_link": "Copier le lien",
+    "copied": "Copié !"
   },
   "image_upload": {
     "preview": "Aperçu"

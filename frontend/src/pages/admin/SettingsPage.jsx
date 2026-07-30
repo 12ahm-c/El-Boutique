@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Save, Loader2, Lock, Phone } from 'lucide-react';
+import { Save, Loader2, Lock, Phone, Link2 } from 'lucide-react';
 import api from '../../config/axios';
 import ImageUpload from '../../components/common/ImageUpload';
 
@@ -11,6 +11,7 @@ const SettingsPage = () => {
     logo: null,
     whatsappNumber: '',
     phoneNumber: '',
+    storeLink: '',
     socialLinks: {
       facebook: '',
       instagram: '',
@@ -44,6 +45,7 @@ const SettingsPage = () => {
             logo: settings.logo || null,
             whatsappNumber: settings.whatsappNumber || '',
             phoneNumber: settings.phoneNumber || '',
+            storeLink: settings.storeLink || '',
             socialLinks: {
               facebook: settings.socialLinks?.facebook || '',
               instagram: settings.socialLinks?.instagram || '',
@@ -212,6 +214,22 @@ const SettingsPage = () => {
                 placeholder="213555555555"
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+              <Link2 size={14} />
+              {t('admin.store_link', 'Store Link')}
+            </label>
+            <input
+              type="url"
+              name="storeLink"
+              value={formData.storeLink || ''}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+              placeholder="https://el-boutique.onrender.com"
+            />
+            <p className="mt-1 text-xs text-gray-500">{t('admin.store_link_help', 'This link will be shown to customers to browse products and place orders.')}</p>
           </div>
 
           <div>

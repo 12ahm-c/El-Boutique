@@ -276,7 +276,11 @@
     "credentials_failed": "فشل في تحديث بيانات الدخول",
     "passwords_not_match": "كلمتا المرور غير متطابقتين",
     "password_min_length": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
-    "phone_number": "رقم الهاتف"
+    "phone_number": "رقم الهاتف",
+    "store_link": "رابط المتجر",
+    "store_link_help": "هذا الرابط سيظهر للزبائن لتصفح المنتجات وإرسال الطلبات.",
+    "copy_link": "نسخ الرابط",
+    "copied": "تم النسخ!"
   },
   "image_upload": {
     "preview": "معاينة"
