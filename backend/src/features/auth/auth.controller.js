@@ -75,4 +75,41 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { login, getMe };
+/**
+ * @desc    Update admin credentials (phone & password)
+ * @route   PUT /api/auth/credentials
+ * @access  Private
+ */
+const updateCredentials = async (req, res, next) => {
+  try {
+    const { currentPassword, phone, newPassword } = req.body;
+
+    if (!currentPassword) {
+      return next(new AppError('Current password is required', 400));
+    }
+
+    const admin = await Admin.findById(req.admin._id).select('+password');
+    const isMatch = await admin.comparePassword(currentPassword);
+
+    if (!isMatch) {
+      return next(new AppError('Current password is incorrect', 400));
+    }
+
+    if (phone) admin.phone = phone;
+    if (newPassword) admin.password = newPassword;
+
+    await admin.save();
+
+    sendSuccess(res, {
+      admin: {
+        id: admin._id,
+        name: admin.name,
+        phone: admin.phone,
+      },
+    }, 'Credentials updated successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { login, getMe, updateCredentials };

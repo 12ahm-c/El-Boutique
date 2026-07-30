@@ -264,7 +264,19 @@
     "whatsapp_customer": "العميل عبر واتساب",
     "view_details": "عرض التفاصيل",
     "delete_order": "حذف الطلب",
-    "language": "اللغة"
+    "language": "اللغة",
+    "login_credentials": "بيانات تسجيل الدخول",
+    "current_password": "كلمة المرور الحالية",
+    "new_phone": "رقم الهاتف الجديد",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور الجديدة",
+    "leave_empty_no_change": "اتركه فارغاً لعدم التغيير",
+    "update_credentials": "تحديث البيانات",
+    "credentials_saved": "تم تحديث بيانات الدخول بنجاح!",
+    "credentials_failed": "فشل في تحديث بيانات الدخول",
+    "passwords_not_match": "كلمتا المرور غير متطابقتين",
+    "password_min_length": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+    "phone_number": "رقم الهاتف"
   },
   "image_upload": {
     "preview": "معاينة"

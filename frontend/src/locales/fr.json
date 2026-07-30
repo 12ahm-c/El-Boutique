@@ -264,7 +264,19 @@
     "whatsapp_customer": "Client WhatsApp",
     "view_details": "Voir les détails",
     "delete_order": "Supprimer la commande",
-    "language": "Langue"
+    "language": "Langue",
+    "login_credentials": "Identifiants de connexion",
+    "current_password": "Mot de passe actuel",
+    "new_phone": "Nouveau numéro de téléphone",
+    "new_password": "Nouveau mot de passe",
+    "confirm_password": "Confirmer le nouveau mot de passe",
+    "leave_empty_no_change": "Laisser vide pour ne pas changer",
+    "update_credentials": "Mettre à jour les identifiants",
+    "credentials_saved": "Identifiants mis à jour avec succès !",
+    "credentials_failed": "Échec de la mise à jour des identifiants",
+    "passwords_not_match": "Les mots de passe ne correspondent pas",
+    "password_min_length": "Le mot de passe doit contenir au moins 6 caractères",
+    "phone_number": "Numéro de téléphone"
   },
   "image_upload": {
     "preview": "Aperçu"
