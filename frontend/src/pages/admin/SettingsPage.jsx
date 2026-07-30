@@ -266,107 +266,108 @@ const SettingsPage = () => {
             </div>
           </div>
         </div>
+      </form>
 
-        {/* Credentials */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
-          <h2 className="text-lg font-medium text-gray-900 border-b border-gray-100 pb-4 flex items-center gap-2">
-            <Lock size={18} />
-            {t('admin.login_credentials', 'Login Credentials')}
-          </h2>
+      {/* Credentials */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
+        <h2 className="text-lg font-medium text-gray-900 border-b border-gray-100 pb-4 flex items-center gap-2">
+          <Lock size={18} />
+          {t('admin.login_credentials', 'Login Credentials')}
+        </h2>
 
-          {credError && (
-            <div className="p-3 bg-red-50 text-red-700 rounded-lg border border-red-100 text-sm">
-              {credError}
-            </div>
-          )}
-          {credSuccess && (
-            <div className="p-3 bg-green-50 text-green-700 rounded-lg border border-green-100 text-sm font-medium">
-              {credSuccess}
-            </div>
-          )}
+        {credError && (
+          <div className="p-3 bg-red-50 text-red-700 rounded-lg border border-red-100 text-sm">
+            {credError}
+          </div>
+        )}
+        {credSuccess && (
+          <div className="p-3 bg-green-50 text-green-700 rounded-lg border border-green-100 text-sm font-medium">
+            {credSuccess}
+          </div>
+        )}
 
-          <form onSubmit={handleCredentialsSubmit} className="space-y-5">
+        <form onSubmit={handleCredentialsSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.current_password', 'Current Password')} *</label>
+            <input
+              type="password"
+              name="currentPassword"
+              required
+              value={credentials.currentPassword}
+              onChange={handleCredentialsChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.current_password', 'Current Password')} *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                <Phone size={14} />
+                {t('admin.new_phone', 'New Phone Number')}
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={credentials.phone}
+                onChange={handleCredentialsChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                placeholder={t('admin.leave_empty_no_change', 'Leave empty to keep current')}
+              />
+            </div>
+            <div></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.new_password', 'New Password')}</label>
               <input
                 type="password"
-                name="currentPassword"
-                required
-                value={credentials.currentPassword}
+                name="newPassword"
+                value={credentials.newPassword}
+                onChange={handleCredentialsChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
+                placeholder={t('admin.leave_empty_no_change', 'Leave empty to keep current')}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.confirm_password', 'Confirm New Password')}</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={credentials.confirmPassword}
                 onChange={handleCredentialsChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
                 placeholder="••••••••"
               />
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-                  <Phone size={14} />
-                  {t('admin.new_phone', 'New Phone Number')}
-                </label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={credentials.phone}
-                  onChange={handleCredentialsChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                  placeholder={t('admin.leave_empty_no_change', 'Leave empty to keep current')}
-                />
-              </div>
-              <div></div>
-            </div>
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              disabled={isSavingCreds}
+              className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 transition-colors"
+            >
+              {isSavingCreds ? <Loader2 className="animate-spin" size={16} /> : <Lock size={16} />}
+              {t('admin.update_credentials', 'Update Credentials')}
+            </button>
+          </div>
+        </form>
+      </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.new_password', 'New Password')}</label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  value={credentials.newPassword}
-                  onChange={handleCredentialsChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                  placeholder={t('admin.leave_empty_no_change', 'Leave empty to keep current')}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.confirm_password', 'Confirm New Password')}</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={credentials.confirmPassword}
-                  onChange={handleCredentialsChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-black focus:border-black"
-                  placeholder="••••••••"
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <button
-                type="submit"
-                disabled={isSavingCreds}
-                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 transition-colors"
-              >
-                {isSavingCreds ? <Loader2 className="animate-spin" size={16} /> : <Lock size={16} />}
-                {t('admin.update_credentials', 'Update Credentials')}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Actions */}
-        <div className="flex justify-end pb-12">
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black disabled:opacity-50 transition-colors"
-          >
-            {isSaving ? <Loader2 className="animate-spin" size={16} /> : <Save size={16} />}
-            {t('admin.save_settings', 'Save Settings')}
-          </button>
-        </div>
-      </form>
+      {/* Actions */}
+      <div className="flex justify-end pb-12">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={isSaving}
+          className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black disabled:opacity-50 transition-colors"
+        >
+          {isSaving ? <Loader2 className="animate-spin" size={16} /> : <Save size={16} />}
+          {t('admin.save_settings', 'Save Settings')}
+        </button>
+      </div>
     </div>
   );
 };
